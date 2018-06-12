@@ -1,2 +1,1 @@
-# server-status-dash
-Generic server and app status monitoring dashboard
+Check out http://shopify.github.com/dashing for more information.

@@ -1,0 +1,59 @@
+<script type='text/javascript'>
+$(function() {
+  Dashing.widget_base_dimensions = [170, 170]
+  Dashing.numColumns = 6
+});
+</script>
+
+<% content_for :title do %>App Server Status<% end %>
+
+<div class="gridster">
+    <ul>
+        <li data-row="1" data-col="5" data-sizex="2" data-sizey="1">
+            <div data-view="Clock" style="background-color: #3D88A7"></div>
+		<i class="icon-time icon-background"></i>
+        </li>
+
+        <li data-row="1" data-col="1" data-sizex="4" data-sizey="1">
+            <div data-id="welcome" data-view="Text" data-title="App Server Status" data-moreinfo="Your awesome team name here!" style="background-color: #6D5B97"></div>
+        </li>
+
+        <li data-row="2" data-col="3" data-sizex="1" data-sizey="1">
+            <div data-id="sss-google" data-view="ServerStatusSquares" data-title="Google"></div>
+        </li>
+        <li data-row="3" data-col="3" data-sizex="1" data-sizey="1">
+            <div data-id="sss-googleserver" data-view="ServerStatusSquares" data-title="Google"></div>
+        </li>
+        <li data-row="2" data-col="4" data-sizex="1" data-sizey="1">
+            <div data-id="sss-reddit" data-view="ServerStatusSquares" data-title="Reddit"></div>
+        </li>
+        <li data-row="3" data-col="4" data-sizex="1" data-sizey="1">
+            <div data-id="sss-redditserver" data-view="ServerStatusSquares" data-title="Reddit"></div>
+        </li>
+        <li data-row="2" data-col="5" data-sizex="1" data-sizey="1">
+            <div data-id="sss-github" data-view="ServerStatusSquares" data-title="Github"></div>
+        </li>
+        <li data-row="3" data-col="5" data-sizex="1" data-sizey="1">
+            <div data-id="sss-githubserver" data-view="ServerStatusSquares" data-title="Github"></div>
+        </li>
+        <li data-row="2" data-col="6" data-sizex="1" data-sizey="1">
+            <div data-id="sss-broken" data-view="ServerStatusSquares" data-title="Broken App"></div>
+        </li>
+        <li data-row="3" data-col="6" data-sizex="1" data-sizey="1">
+            <div data-id="sss-brokenserver" data-view="ServerStatusSquares" data-title="Broken Server"></div>
+        </li>
+        <li data-row="2" data-col="2" data-sizex="1" data-sizey="1">
+            <div data-id="sss-newapp" data-view="ServerStatusSquares" data-title="New App"></div>
+	</li>
+        <li data-row="3" data-col="2" data-sizex="1" data-sizey="1">
+            <div data-id="sss-newserver" data-view="ServerStatusSquares" data-title="New Server"></div>
+	</li>
+        <li data-row="2" data-col="1" data-sizex="1" data-sizey="1">
+            <div data-id="App" data-view="Text" data-title="App" data-moreinfo="http" style="background-color: #345A99"></div>
+	</li>
+        <li data-row="3" data-col="1" data-sizex="1" data-sizey="1">
+            <div data-id="Servers" data-view="Text" data-title="Server" data-moreinfo="ping" style="background-color: #345A99"></div>
+	</li>
+
+    </ul>
+</div>
