@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'net/http'
 require 'uri'
- 
+
 #
 ### Global Config
 #
@@ -30,55 +30,55 @@ ping_count = 10
 #
 servers = [
     {name: 'prod-appserver', url: '172.217.26.206', method: 'ping'},
-    {name: 'prod-app', url: 'https://www.google.com', method: 'https'},
-    {name: 'stage-app', url: 'https://reddit.com/', method: 'https'},
-    {name: 'stage-appserver', url: '72.52.4.119', method: 'ping'},
-    {name: 'prod-app', url: 'https://www.github.com/', method: 'https'},
+    {name: 'prod-app', url: 'http://www.google.com/', method: 'http'},
+    {name: 'stage-app', url: 'http://www.google.com/', method: 'http'},
+    {name: 'stage-appserver', url: '172.217.26.206', method: 'ping'},
+    {name: 'prod-app', url: 'http://www.github.com/', method: 'http'},
     {name: 'prod-appserver', url: '192.30.253.113', method: 'ping'},
-    {name: 'dev-app', url: 'https://www.github.com/', method: 'https'},
+    {name: 'dev-app', url: 'http://www.github.com/', method: 'http'},
     {name: 'dev-appserver', url: '192.30.253.113', method: 'ping'},
-    {name: 'test-app', url: 'https://www.github.com/', method: 'https'},
+    {name: 'test-app', url: 'http://www.github.com/', method: 'http'},
     {name: 'test-appserver', url: '192.30.253.113', method: 'ping'},
 ]
- 
-SCHEDULER.every '1m', :first_in => 0 do |job|
-    servers.each do |server|
-        if server[:method] == 'http'
-            begin
-                uri = URI.parse(server[:url])
-                http = Net::HTTP.new(uri.host, uri.port)
-                http.read_timeout = httptimeout
-                if uri.scheme == "https"
-                    http.use_ssl=true
-                    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-                end
-                request = Net::HTTP::Get.new(uri.request_uri)
-                response = http.request(request)
-                if response.code == "200"
-                    result = 1
-                else
-                    result = 0
-                end
-            rescue Timeout::Error
-                result = 0
-            rescue Errno::ETIMEDOUT
-                result = 0
-            rescue Errno::EHOSTUNREACH
-                result = 0
-            rescue Errno::ECONNREFUSED
-                result = 0
-            rescue SocketError => e
-                result = 0
-            end
-        elsif server[:method] == 'ping'
-            result = `ping -q -c #{ping_count} #{server[:url]}`
-            if ($?.exitstatus == 0)
-                result = 1
-            else
-                result = 0
-            end
-        end
 
-        send_event(server[:name], result: result)
+SCHEDULER.every '2m', :first_in => 0 do |job|
+  servers.each do |server|
+    if server[:method] == 'http'
+      begin
+        uri = URI.parse(server[:url])
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.read_timeout = httptimeout
+        if uri.scheme == "https"
+          http.use_ssl=true
+          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        end
+        request = Net::HTTP::Get.new(uri.request_uri)
+        response = http.request(request)
+        if response.code == "200"
+          result = 1
+        else
+          result = 0
+        end
+      rescue Timeout::Error
+        result = 0
+      rescue Errno::ETIMEDOUT
+        result = 0
+      rescue Errno::EHOSTUNREACH
+        result = 0
+      rescue Errno::ECONNREFUSED
+        result = 0
+      rescue SocketError => e
+        result = 0
+      end
+    elsif server[:method] == 'ping'
+      result = `ping -q -c #{ping_count} #{server[:url]}`
+      if ($?.exitstatus == 0)
+        result = 1
+      else
+        result = 0
+      end
     end
+
+    send_event(server[:name], result: result)
+  end
 end
