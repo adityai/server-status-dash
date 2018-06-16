@@ -29,15 +29,16 @@ ping_count = 10
 #      the check will return false
 #
 servers = [
-    {name: 'sss-google', url: '172.217.26.206', method: 'ping'},
-    {name: 'sss-googleserver', url: 'http://google.com', method: 'http'},
-    {name: 'sss-reddit', url: 'http://www.reddit.com/', method: 'http'},
-    {name: 'sss-redditserver', url: '72.52.4.119', method: 'ping'},
-    {name: 'sss-github', url: 'http://github.com/', method: 'http'},
-    {name: 'sss-githubserver', url: '192.30.253.112', method: 'ping'},
-    {name: 'sss-newserver', url: '192.30.253.113', method: 'ping'},
-    {name: 'sss-broken', url: 'http://192.168.1.100', method: 'http'},
-    {name: 'sss-brokenserver', url: '192.168.1.100', method: 'ping'},
+    {name: 'prod-appserver', url: '172.217.26.206', method: 'ping'},
+    {name: 'prod-app', url: 'https://www.google.com', method: 'https'},
+    {name: 'stage-app', url: 'https://reddit.com/', method: 'https'},
+    {name: 'stage-appserver', url: '72.52.4.119', method: 'ping'},
+    {name: 'prod-app', url: 'https://www.github.com/', method: 'https'},
+    {name: 'prod-appserver', url: '192.30.253.113', method: 'ping'},
+    {name: 'dev-app', url: 'https://www.github.com/', method: 'https'},
+    {name: 'dev-appserver', url: '192.30.253.113', method: 'ping'},
+    {name: 'test-app', url: 'https://www.github.com/', method: 'https'},
+    {name: 'test-appserver', url: '192.30.253.113', method: 'ping'},
 ]
  
 SCHEDULER.every '1m', :first_in => 0 do |job|
